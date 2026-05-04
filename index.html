@@ -159,7 +159,7 @@
 
             try {
                 // Fetch Player Data (ID 20034)
-                const resMain = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://api.gtps.cloud/api/server/public/20034'));
+                const resMain = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://api.gtps.cloud/api/server/public/127.0.0.1'));
                 const jsonMain = await resMain.json();
                 const data = JSON.parse(jsonMain.contents);
 
@@ -170,7 +170,7 @@
                 }
 
                 // Fetch Status Data (ID 20034)
-                const resStatus = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://api.gtps.cloud/g-api/20034/status'));
+                const resStatus = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://api.gtps.cloud/g-api/127.0.0.1/status'));
                 const jsonStatus = await resStatus.json();
                 const statusStr = jsonStatus.contents.toLowerCase();
 
