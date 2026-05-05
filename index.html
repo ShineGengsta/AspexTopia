@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AspexTopia - Growtopia Private Server</title>
+    <style>
+        :root {
+            --primary-color: rgb(176, 224, 230); /* Powder Blue */
+            --bg-dark: #0a0c10;
+            --card-bg: #161b22;
+            --text-main: #ffffff;
+            --text-dim: #8b949e;
+            --accent: #b0e0e6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            max-width: 1100px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 40px 20px;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .server-status {
+            background: rgba(176, 224, 230, 0.1);
+            color: var(--primary-color);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border: 1px solid var(--primary-color);
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+
+        .game-title-img {
+            max-width: 280px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px rgba(176, 224, 230, 0.4));
+        }
+
+        /* Stats Card */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 90%;
+            max-width: 900px;
+            margin: 20px 0;
+        }
+
+        .stat-box {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(176, 224, 230, 0.1);
+            text-align: center;
+        }
+
+        .stat-box h3 {
+            margin: 5px 0;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .stat-box p {
+            margin: 0;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 300px;
+            margin: 30px auto;
+        }
+
+        .btn {
+            padding: 14px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #0d1117;
+        }
+
+        .btn-secondary {
+            border: 1px solid #30363d;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        /* Instructions */
+        .how-to-section {
+            width: 90%;
+            max-width: 900px;
+            margin-top: 50px;
+        }
+
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .card h4 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        code {
+            background: #000;
+            padding: 10px;
+            display: block;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+            color: var(--accent);
+            word-break: break-all;
+        }
+
+        .download-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        footer {
+            margin: 80px 0 40px;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            .stats-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">ASPEX<span style="color:white">TOPIA</span></div>
+        <div style="font-size: 1.2rem;">☰</div>
+    </nav>
+
+    <section class="hero">
+        <div class="server-status" id="status-badge">● LOADING STATUS...</div>
+        <br>
+        <img src="game_title.png" alt="AspexTopia Logo" class="game-title-img">
+        <p>Bergabunglah di <b>AspexTopia</b>, server Growtopia dengan fitur terbaik dan komunitas yang solid.</p>
+
+        <div class="btn-group">
+            <a href="LINK_URL_APK_DI_SINI" class="btn btn-primary">DOWNLOAD APK</a>
+            <a href="https://discord.gg/YOUR_INVITE" class="btn btn-secondary">Join Discord</a>
+        </div>
+    </section>
+
+    <div class="stats-container">
+        <div class="stat-box">
+            <p>Players Online</p>
+            <h3 id="online-count">0</h3>
+        </div>
+        <div class="stat-box">
+            <p>Server Status</p>
+            <h3 id="status-text">...</h3>
+        </div>
+        <div class="stat-box">
+            <p>Active Worlds</p>
+            <h3 id="world-count">0</h3>
+        </div>
+    </div>
+
+    <section class="how-to-section">
+        <h2 style="text-align: center;">How To Play</h2>
+        
+        <div class="platform-grid">
+            <div class="card">
+                <h4>📱 Android (PowerTunnel)</h4>
+                <p>1. Install PowerTunnel APK.</p>
+                <p>2. Configure Host List URL:</p>
+                <code>https://gtpshost.com/raw/AspexTopia</code>
+                <a href="LINK_URL_VHOST_DI_SINI" class="download-link">→ Download vHost File</a>
+            </div>
+
+            <div class="card">
+                <h4>🍎 iOS (Surge/Shadowrocket)</h4>
+                <p>Gunakan link import profile berikut:</p>
+                <code>https://gtpshost.com/ios/AspexTopia</code>
+            </div>
+
+            <div class="card">
+                <h4>💻 Windows & MacOS</h4>
+                <p>Edit file hosts Anda dan tambahkan:</p>
+                <code>
+                    91.134.85.13 www.growtopia1.com<br>
+                    91.134.85.13 www.growtopia2.com
+                </code>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 AspexTopia Private Server
+    </footer>
+
+    <script>
+        // Script untuk mengambil data dari API GTPS Cloud
+        async function fetchStats() {
+            try {
+                const response = await fetch('https://api.gtps.cloud/api/server/public/2934');
+                const data = await response.json();
+                
+                if(data) {
+                    document.getElementById('online-count').innerText = data.online || 0;
+                    document.getElementById('world-count').innerText = data.worlds || 0;
+                    document.getElementById('status-text').innerText = data.status === "online" ? "ONLINE" : "OFFLINE";
+                    document.getElementById('status-badge').innerText = `● SERVER ${data.status.toUpperCase()}`;
+                }
+            } catch (error) {
+                console.log("Error fetching API", error);
+                document.getElementById('status-text').innerText = "ERROR";
+            }
+        }
+
+        fetchStats();
+        setInterval(fetchStats, 30000); // Update setiap 30 detik
+    </script>
+</body>
+</html>
