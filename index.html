@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AxelTopia - Official Website</title>
+    <!-- Import Font & Icon -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --accent-red: #780000;
+            --neon-red: #ff0000;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(120, 0, 0, 0.5);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(120, 0, 0, 0.2) 0%, transparent 50%),
+                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 25px; z-index: 1; }
+
+        /* Fantastic Animations */
+        @keyframes floating { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-15px) scale(1.02); } }
+        @keyframes shadow-pulse { 0%, 100% { filter: drop-shadow(0 0 10px var(--accent-red)); } 50% { filter: drop-shadow(0 0 30px var(--neon-red)); } }
+        @keyframes bg-move { 0% { background-position: 0% 0%; } 100% { background-position: 100% 100%; } }
+
+        /* Floating Music Button */
+        .music-toggle {
+            position: fixed; top: 25px; right: 25px; z-index: 100;
+            background: var(--accent-red); border: 2px solid #fff;
+            width: 50px; height: 50px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 0 20px rgba(120, 0, 0, 0.6);
+            transition: 0.3s;
+        }
+        .music-toggle:hover { transform: rotate(20deg) scale(1.1); }
+
+        /* Header Logo */
+        .logo-wrap { text-align: center; }
+        .logo-img { 
+            width: 230px; 
+            animation: floating 4s ease-in-out infinite, shadow-pulse 4s infinite; 
+        }
+        .server-name {
+            font-family: 'Orbitron', sans-serif; font-size: 38px; font-weight: 900;
+            letter-spacing: 6px; text-transform: uppercase;
+            background: linear-gradient(to bottom, #fff 30%, var(--neon-red) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-top: 10px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.8));
+        }
+
+        /* Fantastic Card System */
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px; padding: 25px;
+            position: relative; overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: 0.5s;
+        }
+        .card:hover::before { left: 100%; }
+
+        .tag {
+            font-size: 10px; font-weight: 800; color: var(--neon-red);
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        /* Status & Online Stats */
+        .stat-flex { display: flex; justify-content: space-between; align-items: center; }
+        .stat-item { display: flex; flex-direction: column; }
+        .online-glow { 
+            color: #00ff88; font-weight: 900; font-size: 28px; 
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.4); 
+        }
+
+        /* Team Management Style */
+        .staff-box {
+            display: flex; align-items: center; gap: 18px; 
+            background: rgba(255,255,255,0.02); padding: 15px;
+            border-radius: 20px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+        .staff-box:hover { background: rgba(120, 0, 0, 0.15); border-color: var(--accent-red); }
+        .staff-pfp { width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--accent-red); padding: 2px; }
+        .role-tag { font-size: 9px; background: var(--accent-red); padding: 3px 10px; border-radius: 6px; font-weight: 900; }
+
+        /* How To Play Grid */
+        .host-card {
+            background: rgba(0,0,0,0.4); border-radius: 20px; padding: 18px;
+            margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;
+            border-left: 5px solid var(--accent-red);
+        }
+        .btn-action {
+            padding: 10px 20px; border-radius: 12px; border: none; font-weight: 800;
+            font-size: 11px; cursor: pointer; transition: 0.3s; text-transform: uppercase;
+        }
+        .btn-copy { background: var(--accent-red); color: #fff; }
+        .btn-open { background: #fff; color: #000; box-shadow: 0 0 15px #fff; }
+        .btn-action:hover { transform: translateY(-3px) scale(1.05); }
+
+        /* Community Icons (Fixed Discord) */
+        .soc-link {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 20px; border-radius: 22px; text-decoration: none; color: #fff;
+            margin-bottom: 15px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.4s;
+        }
+        .soc-link:hover { background: var(--accent-red); box-shadow: 0 0 20px rgba(120, 0, 0, 0.4); }
+        .soc-img { width: 32px; height: 32px; object-fit: contain; }
+
+        /* Purchase Banner */
+        .banner { width: 100%; border-radius: 20px; border: 2px solid var(--accent-red); box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop><source src="https://www.image2url.com/r2/default/audio/1778740326621-854fe3ca-f8d2-4db9-896b-2397cd02fb94.m4a" type="audio/mpeg"></audio>
+
+    <div class="music-toggle" onclick="toggleM()">
+        <i id="mIco" class="fas fa-play"></i>
+    </div>
+
+    <div class="container">
+        <!-- Fantastic Logo Section -->
+        <div class="logo-wrap">
+            <img src="game_title.png" class="logo-img" alt="AxelTopia">
+            <h1 class="server-name">AxelTopia</h1>
+        </div>
+
+        <!-- 1. Fantastic Status -->
+        <div class="card">
+            <div class="stat-flex">
+                <div class="stat-item">
+                    <span class="tag"><i class="fas fa-signal"></i> Network Status</span>
+                    <span id="sText" style="font-weight: 900; letter-spacing: 2px; color: #666;">SCANNING...</span>
+                </div>
+                <div class="stat-item" style="text-align: right;">
+                    <span id="pCount" class="online-glow">0</span>
+                    <span style="font-size: 10px; color: #aaa; font-weight: bold; letter-spacing: 1px;">CITIZENS ONLINE</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Management (Below Status) -->
+        <div class="card">
+            <div class="tag"><i class="fas fa-crown"></i> High Authority</div>
+            <div class="staff-box">
+                <img src="https://cdn.discordapp.com/attachments/1503531185807032320/1504371154364792923/7f0a7aaf9839df52091d29b2604e1932.jpg?ex=6a06be51&is=6a056cd1&hm=b22c66f8a1416197bcbd30f3bdd69ac079fc015b65908b81590e055062a7ffba&" class="staff-pfp">
+                <div>
+                    <p style="font-weight: 800; font-size: 16px;">SHINE <span class="role-tag">Founders</span></p>
+                    <small style="color: #888; font-weight: 600;">@shinegengsta</small>
+                </div>
+            </div>
+            <div class="staff-box">
+                <img src="LINK_FOTO_EMPTY" class="staff-pfp">
+                <div>
+                    <p style="font-weight: 800; font-size: 16px;">EMPTY <span class="role-tag" style="background:#444;">Co-Founders</span></p>
+                    <small style="color: #888; font-weight: 600;">@Empty</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. How To Play -->
+        <div class="card">
+            <div class="tag"><i class="fas fa-terminal"></i> Connection Portal</div>
+            
+            <div class="host-card">
+                <div><p style="font-weight: 800;">Android PT</p><small style="color:#666;">PowerTunnel Mode</small></div>
+                <button class="btn-action btn-copy" onclick="doCopy('IP_HOST')">Copy</button>
+            </div>
+
+            <div class="host-card">
+                <div><p style="font-weight: 800;">iOS Surge</p><small style="color:#666;">Surge 5 Config</small></div>
+                <button class="btn-action btn-copy" onclick="doCopy('IP_HOST')">Copy</button>
+            </div>
+
+            <div class="host-card" style="background: rgba(120,0,0,0.2);">
+                <div><p style="font-weight: 800; color: #ff8888;">Virtual Host</p><small style="color:#aaa;">Direct Web Portal</small></div>
+                <button class="btn-action btn-open" onclick="window.open('LINK_VIRTUAL_HOST')">Open</button>
+            </div>
+
+            <div class="host-card">
+                <div><p style="font-weight: 800;">Windows PC</p><small style="color:#666;">Hosts File Edit</small></div>
+                <button class="btn-action btn-copy" onclick="doCopy('IP_HOST')">Copy</button>
+            </div>
+        </div>
+
+        <!-- 4. Community (Fixed Official Icons) -->
+        <div class="card">
+            <div class="tag"><i class="fas fa-share-nodes"></i> AxelTopia Network</div>
+            <a href="LINK_WA" class="soc-link" target="_blank">
+                <div style="display: flex; align-items: center; gap: 18px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="soc-img">
+                    <div><p style="font-weight: 800;">WhatsApp Group</p><small style="color: #666;">Live Interaction</small></div>
+                </div>
+                <i class="fas fa-arrow-right" style="opacity: 0.3;"></i>
+            </a>
+            <a href="LINK_DC" class="soc-link" target="_blank">
+                <div style="display: flex; align-items: center; gap: 18px;">
+                    <img src="https://cdn.prod.website-files.com/6257adef93867e3d0394e0ff/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" class="soc-img">
+                    <div><p style="font-weight: 800;">Discord Server</p><small style="color: #666;">Official Community</small></div>
+                </div>
+                <i class="fas fa-arrow-right" style="opacity: 0.3;"></i>
+            </a>
+        </div>
+
+        <!-- 5. Purchase -->
+        <div class="card">
+            <div class="tag"><i class="fas fa-shopping-bag"></i> Black Market Store</div>
+            <img src="LINK_FOTO_PRICELIST" class="banner">
+            <div style="margin-top: 20px; padding: 15px; border-radius: 15px; background: rgba(0,0,0,0.5); border: 1px dashed var(--accent-red); text-align: center;">
+                <p style="font-size: 11px; color: #ff8888; font-weight: 900;">UNLEASH YOUR POWER - DONATE FOR EXCLUSIVE ROLES</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById("bgMusic");
+        const mIco = document.getElementById("mIco");
+
+        function toggleM() {
+            if (audio.paused) {
+                audio.play(); mIco.className = "fas fa-pause";
+            } else {
+                audio.pause(); mIco.className = "fas fa-play";
+            }
+        }
+
+        function doCopy(t) {
+            navigator.clipboard.writeText(t);
+            const btn = event.target;
+            btn.innerText = "Copied!"; btn.style.background = "#00ff88"; btn.style.color = "#000";
+            setTimeout(() => { btn.innerText = "Copy"; btn.style.background = "#780000"; btn.style.color = "#fff"; }, 2000);
+        }
+
+        async function updateAPI() {
+            try {
+                const s = await fetch('https://api.gtps.cloud/g-api/20034/status').then(r => r.json());
+                const m = await fetch('https://api.gtps.cloud/api/server/public/2934').then(r => r.json());
+                const txt = document.getElementById('sText');
+                
+                if(s.status === "online") {
+                    txt.innerText = "SYSTEM ACTIVE"; txt.style.color = "#00ff88";
+                } else {
+                    txt.innerText = "SYSTEM OFFLINE"; txt.style.color = "#ff1a1a";
+                }
+                document.getElementById('pCount').innerText = m.onlineCount;
+            } catch (e) { }
+        }
+
+        setInterval(updateAPI, 1);
+        updateAPI();
+    </script>
+</body>
+</html>                                                          
